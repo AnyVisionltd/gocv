@@ -494,7 +494,11 @@ Mat GetAffineTransform2f(Point2fVector src, Point2fVector dst) {
 }
 
 Mat FindHomography(Mat src, Mat dst, int method, double ransacReprojThreshold, Mat mask, const int maxIters, const double confidence) {
+#if defined(HAVE_OPENCV_CALIB3D) && !DISABLE_OPENCV_CALIB3D
     return new cv::Mat(cv::findHomography(*src, *dst, method, ransacReprojThreshold, *mask, maxIters, confidence));
+#else
+    throw "Not implemented need to have opencv compiled with HAVE_OPENCV_CALIB3D flag";
+#endif
 }
 
 void DrawContours(Mat src, PointsVector contours, int contourIdx, Scalar color, int thickness) {

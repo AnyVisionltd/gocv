@@ -1,5 +1,7 @@
 #include "videoio.h"
 
+#if defined(HAVE_OPENCV_VIDEOIO) && !defined(DISABLE_OPENCV_VIDEOIO)
+
 // VideoWriter
 VideoCapture VideoCapture_New() {
     return new cv::VideoCapture();
@@ -69,3 +71,5 @@ int VideoWriter_IsOpened(VideoWriter vw) {
 void VideoWriter_Write(VideoWriter vw, Mat img) {
     *vw << *img;
 }
+
+#endif

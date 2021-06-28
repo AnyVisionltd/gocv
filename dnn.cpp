@@ -1,4 +1,7 @@
+#if !DISABLE_OPENCV_DNN
+
 #include "dnn.h"
+#ifdef HAVE_OPENCV_DNN
 
 Net Net_ReadNet(const char* model, const char* config) {
     Net n = new cv::dnn::Net(cv::dnn::readNet(model, config));
@@ -264,3 +267,5 @@ void NMSBoxesWithParams(struct Rects bboxes, FloatVector scores, const float sco
     indices->val = ptr;
     return;
 }
+#endif
+#endif

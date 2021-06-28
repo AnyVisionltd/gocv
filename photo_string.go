@@ -1,3 +1,5 @@
+// +build !opencvcoreonly
+
 package gocv
 
 func (c SeamlessCloneFlags) String() string {
