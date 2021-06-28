@@ -3,18 +3,19 @@
 
 #ifdef __cplusplus
 #include <opencv2/opencv.hpp>
-#include <opencv2/video.hpp>
 extern "C" {
 #endif
 
 #include "core.h"
 
-#ifdef __cplusplus
+#if defined(__cplusplus) && defined(HAVE_OPENCV_VIDEO)
 typedef cv::Ptr<cv::BackgroundSubtractorMOG2>* BackgroundSubtractorMOG2;
 typedef cv::Ptr<cv::BackgroundSubtractorKNN>* BackgroundSubtractorKNN;
+#ifdef HAVE_OPENCV_TRACKING
 typedef cv::Ptr<cv::Tracker>* Tracker;
 typedef cv::Ptr<cv::TrackerMIL>* TrackerMIL;
 typedef cv::Ptr<cv::TrackerGOTURN>* TrackerGOTURN;
+#endif
 #else
 typedef void* BackgroundSubtractorMOG2;
 typedef void* BackgroundSubtractorKNN;
@@ -39,11 +40,13 @@ void CalcOpticalFlowPyrLKWithParams(Mat prevImg, Mat nextImg, Mat prevPts, Mat n
 void CalcOpticalFlowFarneback(Mat prevImg, Mat nextImg, Mat flow, double pyrScale, int levels,
                               int winsize, int iterations, int polyN, double polySigma, int flags);
 
+#if !defined(__cplusplus) || defined(HAVE_OPENCV_TRACKING)
 bool Tracker_Init(Tracker self, Mat image, Rect boundingBox);
 bool Tracker_Update(Tracker self, Mat image, Rect* boundingBox);
 
 TrackerMIL TrackerMIL_Create();
 void TrackerMIL_Close(TrackerMIL self);
+#endif
 
 #ifdef __cplusplus
 }

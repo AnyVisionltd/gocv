@@ -1,3 +1,5 @@
+#if !DISABLE_OPENCV_HIGHGIU
+
 #include "highgui_gocv.h"
 
 // Window
@@ -77,3 +79,5 @@ void Trackbar_SetMin(const char* winname, const char* trackname, int pos) {
 void Trackbar_SetMax(const char* winname, const char* trackname, int pos) {
     cv::setTrackbarMax(trackname, winname, pos);
 }
+
+#endif

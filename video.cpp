@@ -1,4 +1,5 @@
 #include "video.h"
+#if defined(HAVE_OPENCV_VIDEO) && !defined(DISABLE_OPENCV_VIDEO)
 
 BackgroundSubtractorMOG2 BackgroundSubtractorMOG2_Create() {
     return new cv::Ptr<cv::BackgroundSubtractorMOG2>(cv::createBackgroundSubtractorMOG2());
@@ -47,6 +48,8 @@ void CalcOpticalFlowPyrLKWithParams(Mat prevImg, Mat nextImg, Mat prevPts, Mat n
     cv::calcOpticalFlowPyrLK(*prevImg, *nextImg, *prevPts, *nextPts, *status, *err, sz, maxLevel, *criteria, flags, minEigThreshold);
 }
 
+#ifdef HAVE_OPENCV_TRACKING
+
 bool Tracker_Init(Tracker self, Mat image, Rect boundingBox) {
     cv::Rect bb(boundingBox.x, boundingBox.y, boundingBox.width, boundingBox.height);
 
@@ -71,3 +74,5 @@ TrackerMIL TrackerMIL_Create() {
 void TrackerMIL_Close(TrackerMIL self) {
     delete self;
 }
+#endif
+#endif

@@ -1,17 +1,17 @@
 #ifndef _OPENCV3_DNN_H_
 #define _OPENCV3_DNN_H_
 
+#if !DISABLE_OPENCV_DNN
 #include <stdbool.h>
 
 #ifdef __cplusplus
 #include <opencv2/opencv.hpp>
-#include <opencv2/dnn.hpp>
 extern "C" {
 #endif
 
 #include "core.h"
 
-#ifdef __cplusplus
+#if defined(__cplusplus) && defined(HAVE_OPENCV_DNN)
 typedef cv::dnn::Net* Net;
 typedef cv::Ptr<cv::dnn::Layer>* Layer;
 #else
@@ -19,6 +19,7 @@ typedef void* Net;
 typedef void* Layer;
 #endif
 
+#if !defined(__cplusplus) || defined(HAVE_OPENCV_DNN)
 Net Net_ReadNet(const char* model, const char* config);
 Net Net_ReadNetBytes(const char* framework, struct ByteArray model, struct ByteArray config);
 Net Net_ReadNetFromCaffe(const char* prototxt, const char* caffeModel);
@@ -56,9 +57,11 @@ const char* Layer_GetType(Layer layer);
 
 void NMSBoxes(struct Rects bboxes, FloatVector scores, float score_threshold, float nms_threshold, IntVector* indices);
 void NMSBoxesWithParams(struct Rects bboxes, FloatVector scores, const float score_threshold, const float nms_threshold, IntVector* indices, const float eta, const int top_k);
+#endif
 
 #ifdef __cplusplus
 }
 #endif
 
 #endif //_OPENCV3_DNN_H_
+#endif

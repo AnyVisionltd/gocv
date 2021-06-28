@@ -1,4 +1,7 @@
+#if !DISABLE_OPENCV_VIDEOIO
 #include "videoio.h"
+
+#ifdef HAVE_OPENCV_VIDEOIO
 
 // VideoWriter
 VideoCapture VideoCapture_New() {
@@ -69,3 +72,6 @@ int VideoWriter_IsOpened(VideoWriter vw) {
 void VideoWriter_Write(VideoWriter vw, Mat img) {
     *vw << *img;
 }
+
+#endif
+#endif

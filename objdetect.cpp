@@ -1,5 +1,8 @@
+#if !DISABLE_OPENCV_OBJDETECT
+
 #include "objdetect.h"
 
+#ifdef HAVE_OPENCV_OBJDETECT
 // CascadeClassifier
 
 CascadeClassifier CascadeClassifier_New() {
@@ -176,3 +179,5 @@ bool QRCodeDetector_DetectAndDecodeMulti(QRCodeDetector qr, Mat input, CStrings*
   decoded->strs = strs;
   return res;
 }
+#endif
+#endif

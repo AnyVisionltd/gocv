@@ -10,7 +10,8 @@ extern "C" {
 
 #include "core.h"
 
-#ifdef __cplusplus
+
+#if defined(__cplusplus) && defined(HAVE_OPENCV_OBJDETECT)
 typedef cv::CascadeClassifier* CascadeClassifier;
 typedef cv::HOGDescriptor* HOGDescriptor;
 typedef cv::QRCodeDetector* QRCodeDetector;
@@ -20,6 +21,7 @@ typedef void* HOGDescriptor;
 typedef void* QRCodeDetector;
 #endif
 
+#if !defined(__cplusplus) || defined(HAVE_OPENCV_OBJDETECT)
 // CascadeClassifier
 CascadeClassifier CascadeClassifier_New();
 void CascadeClassifier_Close(CascadeClassifier cs);
@@ -47,6 +49,7 @@ const char* QRCodeDetector_Decode(QRCodeDetector qr, Mat input,Mat inputPoints,M
 void QRCodeDetector_Close(QRCodeDetector qr);
 bool QRCodeDetector_DetectMulti(QRCodeDetector qr, Mat input, Mat points);
 bool QRCodeDetector_DetectAndDecodeMulti(QRCodeDetector qr, Mat input, CStrings* decoded ,Mat points, struct Mats* mats);
+#endif
 
 #ifdef __cplusplus
 }

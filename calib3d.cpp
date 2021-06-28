@@ -1,5 +1,7 @@
-#include "calib3d.h"
+#if !DISABLE_OPENCV_CALIB3D
 
+#include "calib3d.h"
+#ifdef HAVE_OPENCV_CALIB3D
 
 void Fisheye_UndistortImage(Mat distorted, Mat undistorted, Mat k, Mat d) {
     cv::fisheye::undistortImage(*distorted, *undistorted, *k, *d);
@@ -58,3 +60,5 @@ void DrawChessboardCorners(Mat image, Size patternSize, Mat corners, bool patter
 Mat EstimateAffinePartial2D(Point2fVector from, Point2fVector to) {
     return new cv::Mat(cv::estimateAffinePartial2D(*from, *to));
 }
+#endif
+#endif

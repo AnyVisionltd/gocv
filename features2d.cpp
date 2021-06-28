@@ -1,3 +1,5 @@
+#if !DISABLE_OPENCV_FEATURES2D
+
 #include "features2d.h"
 
 AKAZE AKAZE_Create() {
@@ -554,3 +556,4 @@ void DrawMatches(Mat img1, struct KeyPoints kp1, Mat img2, struct KeyPoints kp2,
 
     cv::drawMatches(*img1, kp1vec, *img2, kp2vec, dmatchvec, *outImg, cvmatchescolor, cvpointcolor, maskvec, static_cast<cv::DrawMatchesFlags>(flags));
 }
+#endif
