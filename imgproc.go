@@ -795,35 +795,6 @@ const (
 	MorphHitmiss MorphType = 7
 )
 
-// BorderType type of border.
-type BorderType int
-
-const (
-	// BorderConstant border type
-	BorderConstant BorderType = 0
-
-	// BorderReplicate border type
-	BorderReplicate BorderType = 1
-
-	// BorderReflect border type
-	BorderReflect BorderType = 2
-
-	// BorderWrap border type
-	BorderWrap BorderType = 3
-
-	// BorderReflect101 border type
-	BorderReflect101 BorderType = 4
-
-	// BorderTransparent border type
-	BorderTransparent BorderType = 5
-
-	// BorderDefault border type
-	BorderDefault = BorderReflect101
-
-	// BorderIsolated border type
-	BorderIsolated BorderType = 16
-)
-
 // GaussianBlur blurs an image Mat using a Gaussian filter.
 // The function convolves the src Mat image into the dst Mat using
 // the specified Gaussian kernel params.

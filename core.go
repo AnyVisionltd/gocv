@@ -161,6 +161,35 @@ const (
 	CompareNE CompareType = 5
 )
 
+// BorderType type of border.
+type BorderType int
+
+const (
+	// BorderConstant border type
+	BorderConstant BorderType = 0
+
+	// BorderReplicate border type
+	BorderReplicate BorderType = 1
+
+	// BorderReflect border type
+	BorderReflect BorderType = 2
+
+	// BorderWrap border type
+	BorderWrap BorderType = 3
+
+	// BorderReflect101 border type
+	BorderReflect101 BorderType = 4
+
+	// BorderTransparent border type
+	BorderTransparent BorderType = 5
+
+	// BorderDefault border type
+	BorderDefault = BorderReflect101
+
+	// BorderIsolated border type
+	BorderIsolated BorderType = 16
+)
+
 type Point2f struct {
 	X float32
 	Y float32
